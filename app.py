@@ -68,16 +68,12 @@ def _ensure_demo_seed() -> None:
 
 
 
+import autoseed
+
 @app.before_request
-
-def startup():
-
-
-db.init_db()
-
-_ensure_demo_seed()
-
-
+def _startup():
+    db.init_db()
+    autoseed.seed_if_empty()
 # ── Helpers ───────────────────────────────────────────────────────────────────
 
 def _now_iso() -> str:
